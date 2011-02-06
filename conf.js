@@ -1,6 +1,6 @@
 var hudson = hudson || {};
 hudson.conf = function () {
-    var default_url = "http://ci.hudson-labs.org/",
+    var default_url = "http://ci.jenkins-ci.org/",
         default_pollIntervall = 10;
 
     function setPollIntervall(minutes) {
