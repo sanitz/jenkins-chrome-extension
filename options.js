@@ -24,13 +24,13 @@ hudson.options = function(conf) {
         },
 
         markDirty : function () {
-            showSaveStatus(false)
+            showSaveStatus(false);
         },
 
 
         init : function () {
-            hudsonUrlTextbox = document.getElementById("hudson-url"), 
-            pollIntervallTextbox = document.getElementById("poll-intervall"), 
+            hudsonUrlTextbox = document.getElementById("hudson-url");
+            pollIntervallTextbox = document.getElementById("poll-intervall");
             saveButton = document.getElementById("save-button");
             saveStatus = document.getElementById("save-status");
             display();
