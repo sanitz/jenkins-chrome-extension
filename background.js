@@ -3,7 +3,7 @@ hudson.results = { lastUpdate : 'never' };
 
 hudson.open = function() {
     function sameUrl(orig, other) {
-        if (other.indexOf(orig) != 0)
+        if (other.indexOf(orig) !== 0)
             return false;
         return other.length == orig.length ||
             other[orig.length] == '?' ||
@@ -30,7 +30,7 @@ hudson.init = function (conf, results) {
         build = {
             ok :   {    msg : "OK",     color : [0, 128, 0, 255] },
             failed : {  msg : "Fail",   color : [255, 0, 0, 255] },
-            unknown: {  msg : "?",      color : [128, 128, 128, 255] },
+            unknown: {  msg : "?",      color : [128, 128, 128, 255] }
         };
 
     function setState(state, msg) {

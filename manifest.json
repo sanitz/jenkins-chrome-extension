@@ -1,13 +1,13 @@
 {
-    "name": "Hudson Extension",
+    "name": "Jenkins Extension",
     "version": "0.9.3",
-    "description": "This Extensions monitors Hudson.",
+    "description": "This Extensions monitors Jenkins.",
     "icons": { "128": "icon128.png" },
     "options_page": "options.html",
     "background_page": "background.html",
     "browser_action": {
        "default_icon": "icon.png",
-       "default_title": "Hudson",
+       "default_title": "Jenkins",
        "popup" : "status.html"
     },
     "permissions": [
