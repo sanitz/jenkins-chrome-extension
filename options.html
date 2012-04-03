@@ -8,11 +8,27 @@
     <body onload="hudson.options.init()">
     <div id="header"><h1>Hudson Extension</h1></div>
 
+	<form id="optionForm" name="optionForm">
     <div class="section-header first">Options</div>
-    <p>Enter the URL of your Hudson here:</p>
-    <input type="text" id="hudson-url" oninput="hudson.options.markDirty()">
-    <p>Enter poll intervall in in minutes:</p>
-    <input type="text" id="poll-intervall" oninput="hudson.options.markDirty()">
+	<div>
+		<label for="hudson-url">Enter the URL of your Hudson here:</label>
+		<input type="text" id="hudson-url" oninput="hudson.options.markDirty()" />
+	</div>
+	<div>
+		<label for="poll-intervall">Enter poll intervall in in minutes:</label>
+		<input type="text" id="poll-intervall" oninput="hudson.options.markDirty()" />
+	</div>
+	<div>
+		<label for="icon-size">Choose icon size:</label>
+		<label for="small">S</label><input type="radio" id="small" name="icon-size" value="small"  onchange="hudson.options.markDirty()"/>
+		<label for="medium">M</label><input type="radio" id="medium" name="icon-size" value="medium"  onchange="hudson.options.markDirty()"/>
+		<label for="large">L</label><input type="radio" id="large" name="icon-size" value="large"  onchange="hudson.options.markDirty()"/>
+	</div>
+	<div>
+		<label for="successColor">Choose success color:</label>
+		<label for="blue">Blue</label><input type="radio" id="blue" name="successColor" value="blue" onchange="hudson.options.markDirty()" />
+		<label for="green">Green</label><input type="radio" id="green" name="successColor" value="green" onchange="hudson.options.markDirty()" />
+	</div>
     <div class="footer">
         <button id="save-button" style="font-weight:bold" onclick="hudson.options.save()" >Save</button>
         <button onclick="hudson.options.init()">Cancel</button>

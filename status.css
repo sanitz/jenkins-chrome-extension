@@ -1,0 +1,40 @@
+body {
+	font-family: Helvetica, Arial;
+	font-size: small;
+	min-width: 300px;
+}
+
+.heading {
+	font-weight: bold;
+	margin: 2px;
+	padding: 6px;
+}
+
+.url {
+	margin: 4px;
+	padding: 4px;
+}
+
+.error {
+	background-color: #ff0000;
+	color: #000;
+	margin 6px;
+	font-weight: bold;
+	padding: 9px;
+	border-radius: 4px;
+}
+.small {
+	font-size: 10px;
+}
+.medium {
+	font-size: 12px;
+}
+.large {
+	font-size: 14px;
+}
+
+td {
+	border-bottom: 1px solid #eee;
+	padding: 1px;
+
+}

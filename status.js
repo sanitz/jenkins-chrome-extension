@@ -1,6 +1,6 @@
 var hudson = hudson || {};
 
-hudson.status = function() {
+hudson.status = function(conf) {
     
     function showUrl(evt) {
         var url = evt.currentTarget.href,
@@ -22,11 +22,22 @@ hudson.status = function() {
 
     function asIcon(result) {
         var icon = document.createElement('img'),
-            name = result.color;
+            name = result.color,
+			extension = ".png";
         if (name === 'aborted' || name === 'disabled') {
             name = 'grey';
         }
-        icon.src = name + ".gif";
+		if (name == 'blue') {
+			name = conf.successColor();
+		}
+		if (name == 'blue_anime') {
+			name = conf.successColor() + "_anime";
+		}
+		if (name.search("anime") >= 0) {
+			extension = ".gif";
+		}
+		var size = conf.iconSize();
+        icon.src = "images/" + size + "/" + name + extension;
         return icon;
     }
 
@@ -39,6 +50,7 @@ hudson.status = function() {
             tr.className = "feedList";
             tdIcon.appendChild(asIcon(r));
             tdName.appendChild(link(r.url, r.name));
+			tdName.className = conf.iconSize();
             tr.appendChild(tdIcon);
             tr.appendChild(tdName);
             list.appendChild(tr);
@@ -60,7 +72,7 @@ hudson.status = function() {
             heading = document.getElementById('heading'),
             url = document.createElement('div');
         
-        heading.innerText = "Hudson Status ";
+        heading.innerText = "Jenkins Status ";
         url.className = 'url';
         url.appendChild(link(hudson.conf.hudsonURL()));
         content.appendChild(url);
@@ -78,5 +90,8 @@ hudson.status = function() {
         options.appendChild(lastUpdate);
         options.appendChild(link(chrome.extension.getURL('options.html'), 'Options'));
     }}
-}();
+}(hudson.conf);
 
+window.onload = function() {
+	hudson.status.show();
+};

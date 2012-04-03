@@ -27,12 +27,24 @@ hudson.conf = function () {
         }
     }
 
+	function setIconSize(size) {
+		localStorage.iconSize = size;
+	}
+
+	function setSuccessColor(color) {
+		localStorage.successColor = color;
+	}
+
     return {
         pollIntervall : get('pollIntervall', default_pollIntervall),
         hudsonURL : get('hudsonUrl', default_url), 
+		iconSize: get('iconSize', "medium"),
+		successColor: get('successColor', "blue"),
         set : function (values) {
             setPollIntervall(values.pollIntervall);
             setHudsonURL(values.hudsonURL);
+			setIconSize(values.iconSize);
+			setSuccessColor(values.successColor);
         },
         apiURL : function() {
             return this.hudsonURL() + "api/json/";
