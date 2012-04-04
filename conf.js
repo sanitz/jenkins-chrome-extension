@@ -1,5 +1,5 @@
-var hudson = hudson || {};
-hudson.conf = function () {
+var jenkins = jenkins || {};
+jenkins.conf = function () {
     var default_url = "http://ci.jenkins-ci.org/",
         default_pollIntervall = 10;
 
@@ -10,12 +10,12 @@ hudson.conf = function () {
             }
     }
 
-    function setHudsonURL(url) {
+    function setJenkinsURL(url) {
         var slash = '/';
         if (slash !== url.substr( url.length  - slash.length, slash.length ) ) {
             url = url + slash;
         }
-        localStorage.hudsonUrl = url;
+        localStorage.jenkinsUrl = url;
     }
 
     function get(name, defaultValue) {
@@ -27,15 +27,27 @@ hudson.conf = function () {
         }
     }
 
+	function setIconSize(size) {
+		localStorage.iconSize = size;
+	}
+
+	function setSuccessColor(color) {
+		localStorage.successColor = color;
+	}
+
     return {
         pollIntervall : get('pollIntervall', default_pollIntervall),
-        hudsonURL : get('hudsonUrl', default_url), 
+        jenkinsURL : get('jenkinsUrl', default_url), 
+		iconSize: get('iconSize', "medium"),
+		successColor: get('successColor', "blue"),
         set : function (values) {
             setPollIntervall(values.pollIntervall);
-            setHudsonURL(values.hudsonURL);
+            setJenkinsURL(values.jenkinsURL);
+			setIconSize(values.iconSize);
+			setSuccessColor(values.successColor);
         },
         apiURL : function() {
-            return this.hudsonURL() + "api/json/";
+            return this.jenkinsURL() + "api/json/";
         }
     }
 }();
