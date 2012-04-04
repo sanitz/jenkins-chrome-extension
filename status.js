@@ -1,11 +1,11 @@
-var hudson = hudson || {};
+var jenkins = jenkins || {};
 
-hudson.status = function(conf) {
+jenkins.status = function(conf) {
     
     function showUrl(evt) {
         var url = evt.currentTarget.href,
-            hudson = chrome.extension.getBackgroundPage().hudson;
-        hudson.open(url);
+            jenkins = chrome.extension.getBackgroundPage().jenkins;
+        jenkins.open(url);
         window.close();
     }
 
@@ -65,7 +65,7 @@ hudson.status = function(conf) {
     }
 
     return { show : function () {
-        var hudson = chrome.extension.getBackgroundPage().hudson, 
+        var jenkins = chrome.extension.getBackgroundPage().jenkins, 
             options = document.getElementById('options'), 
             lastUpdate = document.createElement('div'), 
             content = document.getElementById('content'),
@@ -74,24 +74,24 @@ hudson.status = function(conf) {
         
         heading.innerText = "Jenkins Status ";
         url.className = 'url';
-        url.appendChild(link(hudson.conf.hudsonURL()));
+        url.appendChild(link(jenkins.conf.jenkinsURL()));
         content.appendChild(url);
-        if (hudson.results.error) {
+        if (jenkins.results.error) {
             var err = document.createElement('div');
             err.className = 'error';
-            err.innerText = hudson.results.error
+            err.innerText = jenkins.results.error
             content.appendChild(err);
         } else {
-            var list = createList(hudson.results.hudson.jobs);
+            var list = createList(jenkins.results.jenkins.jobs);
             content.appendChild(list);
         }
         
-        lastUpdate.innerText = "Last Update: " + timeSince(hudson.results.lastUpdate);
+        lastUpdate.innerText = "Last Update: " + timeSince(jenkins.results.lastUpdate);
         options.appendChild(lastUpdate);
         options.appendChild(link(chrome.extension.getURL('options.html'), 'Options'));
     }}
-}(hudson.conf);
+}(jenkins.conf);
 
 window.onload = function() {
-	hudson.status.show();
+	jenkins.status.show();
 };

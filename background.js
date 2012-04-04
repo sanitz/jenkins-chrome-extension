@@ -1,7 +1,7 @@
-var hudson = hudson || {};
-hudson.results = { lastUpdate : 'never' };
+var jenkins = jenkins || {};
+jenkins.results = { lastUpdate : 'never' };
 
-hudson.open = function() {
+jenkins.open = function() {
     function sameUrl(orig, other) {
         if (other.indexOf(orig) !== 0)
             return false;
@@ -23,7 +23,7 @@ hudson.open = function() {
     };
 }();
 
-hudson.init = function (conf, results) {
+jenkins.init = function (conf, results) {
     var xhr = undefined,
         timeoutId = undefined,
         successColors = /(blue|grey|disabled)/,
@@ -91,13 +91,13 @@ hudson.init = function (conf, results) {
 
     function display(text) {
         try {
-            results.hudson = JSON.parse(text);
+            results.jenkins = JSON.parse(text);
         } catch (e) {
-            onerror("Failed to parse JSON data from " + conf.hudsonUrl() + ": " + e);
+            onerror("Failed to parse JSON data from " + conf.jenkinsUrl() + ": " + e);
             return;
         }
         results.error = undefined;
-        if (isSuccess(results.hudson.jobs)) {
+        if (isSuccess(results.jenkins.jobs)) {
             setState(build.ok, "Build OK");
         } else {
             setState(build.failed, "Build Failed!");
@@ -109,4 +109,4 @@ hudson.init = function (conf, results) {
         start();
     };
 
-}(hudson.conf, hudson.results);
+}(jenkins.conf, jenkins.results);

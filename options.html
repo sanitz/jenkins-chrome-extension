@@ -1,37 +1,37 @@
 <html>
     <head>
-        <title>Hudson Extension - Options</title>
+        <title>Jenkins Extension - Options</title>
         <link rel="stylesheet" type="text/css" href="options.css" />
         <script src="conf.js"></script>
         <script src="options.js"></script>
     </head>
-    <body onload="hudson.options.init()">
-    <div id="header"><h1>Hudson Extension</h1></div>
+    <body onload="jenkins.options.init()">
+    <div id="header"><h1>Jenkins Extension</h1></div>
 
 	<form id="optionForm" name="optionForm">
     <div class="section-header first">Options</div>
 	<div>
-		<label for="hudson-url">Enter the URL of your Hudson here:</label>
-		<input type="text" id="hudson-url" oninput="hudson.options.markDirty()" />
+		<label for="jenkins-url">Enter the URL of your Jenkins here:</label>
+		<input type="text" id="jenkins-url" oninput="jenkins.options.markDirty()" />
 	</div>
 	<div>
 		<label for="poll-intervall">Enter poll intervall in in minutes:</label>
-		<input type="text" id="poll-intervall" oninput="hudson.options.markDirty()" />
+		<input type="text" id="poll-intervall" oninput="jenkins.options.markDirty()" />
 	</div>
 	<div>
 		<label for="icon-size">Choose icon size:</label>
-		<label for="small">S</label><input type="radio" id="small" name="icon-size" value="small"  onchange="hudson.options.markDirty()"/>
-		<label for="medium">M</label><input type="radio" id="medium" name="icon-size" value="medium"  onchange="hudson.options.markDirty()"/>
-		<label for="large">L</label><input type="radio" id="large" name="icon-size" value="large"  onchange="hudson.options.markDirty()"/>
+		<label for="small">S</label><input type="radio" id="small" name="icon-size" value="small"  onchange="jenkins.options.markDirty()"/>
+		<label for="medium">M</label><input type="radio" id="medium" name="icon-size" value="medium"  onchange="jenkins.options.markDirty()"/>
+		<label for="large">L</label><input type="radio" id="large" name="icon-size" value="large"  onchange="jenkins.options.markDirty()"/>
 	</div>
 	<div>
 		<label for="successColor">Choose success color:</label>
-		<label for="blue">Blue</label><input type="radio" id="blue" name="successColor" value="blue" onchange="hudson.options.markDirty()" />
-		<label for="green">Green</label><input type="radio" id="green" name="successColor" value="green" onchange="hudson.options.markDirty()" />
+		<label for="blue">Blue</label><input type="radio" id="blue" name="successColor" value="blue" onchange="jenkins.options.markDirty()" />
+		<label for="green">Green</label><input type="radio" id="green" name="successColor" value="green" onchange="jenkins.options.markDirty()" />
 	</div>
     <div class="footer">
-        <button id="save-button" style="font-weight:bold" onclick="hudson.options.save()" >Save</button>
-        <button onclick="hudson.options.init()">Cancel</button>
+        <button id="save-button" style="font-weight:bold" onclick="jenkins.options.save()" >Save</button>
+        <button onclick="jenkins.options.init()">Cancel</button>
         <span id="save-status" style="display:none">Options saved.</span>
     </div>
 </body>

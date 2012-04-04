@@ -1,5 +1,5 @@
-hudson.options = function(conf) {
-    var hudsonUrlTextbox, pollIntervallTextbox, saveButton, saveStatus, iconSize;
+jenkins.options = function(conf) {
+    var jenkinsUrlTextbox, pollIntervallTextbox, saveButton, saveStatus, iconSize;
 
     function showSaveStatus(show) {
         saveStatus.style.display = show ? '' : "none";
@@ -7,7 +7,7 @@ hudson.options = function(conf) {
     }
 
     function display() {
-        hudsonUrlTextbox.value = conf.hudsonURL();
+        jenkinsUrlTextbox.value = conf.jenkinsURL();
         pollIntervallTextbox.value = conf.pollIntervall();
 		document.getElementById(conf.iconSize()).checked = true;
 		document.getElementById(conf.successColor()).checked = true;
@@ -39,14 +39,14 @@ hudson.options = function(conf) {
     return { 
         save : function () {
             conf.set({ 
-                hudsonURL : hudsonUrlTextbox.value,
+                jenkinsURL : jenkinsUrlTextbox.value,
                 pollIntervall: pollIntervallTextbox.value,
 				iconSize: getIconSize(),
 				successColor: getSuccessColor()
             });
             showSaveStatus(true);
             display();
-            chrome.extension.getBackgroundPage().hudson.init();
+            chrome.extension.getBackgroundPage().jenkins.init();
         },
 
         markDirty : function () {
@@ -55,12 +55,12 @@ hudson.options = function(conf) {
 
 
         init : function () {
-            hudsonUrlTextbox = document.getElementById("hudson-url");
+            jenkinsUrlTextbox = document.getElementById("jenkins-url");
             pollIntervallTextbox = document.getElementById("poll-intervall");
             saveButton = document.getElementById("save-button");
             saveStatus = document.getElementById("save-status");
             display();
         }
     };
-}(hudson.conf);
+}(jenkins.conf);
 
