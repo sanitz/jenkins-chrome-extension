@@ -1,11 +1,11 @@
-var hudson = hudson || {};
+var jenkins = jenkins || {};
 
-hudson.status = function() {
+jenkins.status = function(conf) {
     
     function showUrl(evt) {
         var url = evt.currentTarget.href,
-            hudson = chrome.extension.getBackgroundPage().hudson;
-        hudson.open(url);
+            jenkins = chrome.extension.getBackgroundPage().jenkins;
+        jenkins.open(url);
         window.close();
     }
 
@@ -22,11 +22,22 @@ hudson.status = function() {
 
     function asIcon(result) {
         var icon = document.createElement('img'),
-            name = result.color;
+            name = result.color,
+			extension = ".png";
         if (name === 'aborted' || name === 'disabled') {
             name = 'grey';
         }
-        icon.src = name + ".gif";
+		if (name == 'blue') {
+			name = conf.successColor();
+		}
+		if (name == 'blue_anime') {
+			name = conf.successColor() + "_anime";
+		}
+		if (name.search("anime") >= 0) {
+			extension = ".gif";
+		}
+		var size = conf.iconSize();
+        icon.src = "images/" + size + "/" + name + extension;
         return icon;
     }
 
@@ -39,6 +50,7 @@ hudson.status = function() {
             tr.className = "feedList";
             tdIcon.appendChild(asIcon(r));
             tdName.appendChild(link(r.url, r.name));
+			tdName.className = conf.iconSize();
             tr.appendChild(tdIcon);
             tr.appendChild(tdName);
             list.appendChild(tr);
@@ -53,30 +65,33 @@ hudson.status = function() {
     }
 
     return { show : function () {
-        var hudson = chrome.extension.getBackgroundPage().hudson, 
+        var jenkins = chrome.extension.getBackgroundPage().jenkins, 
             options = document.getElementById('options'), 
             lastUpdate = document.createElement('div'), 
             content = document.getElementById('content'),
             heading = document.getElementById('heading'),
             url = document.createElement('div');
         
-        heading.innerText = "Hudson Status ";
+        heading.innerText = "Jenkins Status ";
         url.className = 'url';
-        url.appendChild(link(hudson.conf.hudsonURL()));
+        url.appendChild(link(jenkins.conf.jenkinsURL()));
         content.appendChild(url);
-        if (hudson.results.error) {
+        if (jenkins.results.error) {
             var err = document.createElement('div');
             err.className = 'error';
-            err.innerText = hudson.results.error
+            err.innerText = jenkins.results.error
             content.appendChild(err);
         } else {
-            var list = createList(hudson.results.hudson.jobs);
+            var list = createList(jenkins.results.jenkins.jobs);
             content.appendChild(list);
         }
         
-        lastUpdate.innerText = "Last Update: " + timeSince(hudson.results.lastUpdate);
+        lastUpdate.innerText = "Last Update: " + timeSince(jenkins.results.lastUpdate);
         options.appendChild(lastUpdate);
         options.appendChild(link(chrome.extension.getURL('options.html'), 'Options'));
     }}
-}();
+}(jenkins.conf);
 
+window.onload = function() {
+	jenkins.status.show();
+};
